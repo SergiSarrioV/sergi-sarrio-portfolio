@@ -1,0 +1,167 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #05060a;
+  --foreground: #e6e8f0;
+}
+
+* {
+  border-color: theme("colors.ink.600");
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Custom selection color */
+::selection {
+  background: rgba(124, 92, 255, 0.35);
+  color: #fff;
+}
+
+/* Thin techie scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #05060a;
+}
+::-webkit-scrollbar-thumb {
+  background: #1f2535;
+  border-radius: 9999px;
+  border: 2px solid #05060a;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #2c3450;
+}
+
+@layer utilities {
+  /* Gradient text used for accent words/headings */
+  .text-gradient {
+    background-image: linear-gradient(110deg, #a78bfa 0%, #7c5cff 35%, #22d3ee 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Animated gradient text */
+  .text-gradient-animated {
+    background-image: linear-gradient(110deg, #a78bfa, #7c5cff, #22d3ee, #7c5cff);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: gradient-x 6s ease infinite;
+  }
+
+  /* Subtle dotted/grid background for sections */
+  .bg-grid {
+    background-image:
+      linear-gradient(to right, rgba(124, 92, 255, 0.06) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(124, 92, 255, 0.06) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+
+  /* Glassy card surface */
+  .glass {
+    background: rgba(16, 19, 28, 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  /* Glow ring on hover */
+  .glow-border {
+    box-shadow: 0 0 0 1px rgba(124, 92, 255, 0.15);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+  }
+  .glow-border:hover {
+    box-shadow:
+      0 0 0 1px rgba(124, 92, 255, 0.5),
+      0 0 30px -6px rgba(124, 92, 255, 0.45);
+  }
+
+  .mask-fade-b {
+    -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+  }
+}
+
+/* ── Aurora + extra motion keyframes ─────────────────────────────────── */
+
+@keyframes hue-spin {
+  to {
+    filter: hue-rotate(360deg);
+  }
+}
+.animate-hue {
+  animation: hue-spin 18s linear infinite;
+}
+
+@keyframes aurora-drift {
+  0% {
+    transform: translate3d(-10%, -5%, 0) rotate(0deg) scale(1.1);
+  }
+  50% {
+    transform: translate3d(10%, 8%, 0) rotate(180deg) scale(1.35);
+  }
+  100% {
+    transform: translate3d(-10%, -5%, 0) rotate(360deg) scale(1.1);
+  }
+}
+.animate-aurora {
+  animation: aurora-drift 28s ease-in-out infinite;
+}
+
+@keyframes caret-blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+.animate-caret {
+  animation: caret-blink 1.05s step-end infinite;
+}
+
+/* Sweeping shimmer used to highlight headings */
+@keyframes shimmer-sweep {
+  0% {
+    background-position: -150% 0;
+  }
+  100% {
+    background-position: 250% 0;
+  }
+}
+
+/* Respect users who prefer fewer animations */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+
+  /* Transform-based loops must be cancelled outright: collapsing their
+     duration would otherwise snap them straight to their end frame (the
+     marquee track would jump a full copy to the left and disappear). */
+  .animate-marquee,
+  .animate-float {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
