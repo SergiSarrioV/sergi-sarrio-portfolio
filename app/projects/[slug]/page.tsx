@@ -9,6 +9,7 @@ import { ScrollFade } from "@/components/ScrollFade";
 import { Footer } from "@/components/Footer";
 import { ProjectImageFrame } from "@/components/ProjectImageFrame";
 import { ProjectCarousel } from "@/components/ProjectCarousel";
+import { PhoneCarousel } from "@/components/PhoneCarousel";
 import { ProjectLinks } from "@/components/ProjectLinks";
 
 // Only pre-generated slugs are valid; everything else 404s.
@@ -46,6 +47,7 @@ export default async function ProjectPage({
   const project = getProject(slug);
   if (!project) notFound();
 
+  const phoneLayout = project.imageLayout === "phone";
   const cover = project.images?.[0];
   const gallery = project.images?.slice(1) ?? [];
 
@@ -79,9 +81,18 @@ export default async function ProjectPage({
               {project.status}
             </span>
           )}
-          <h1 className="text-gradient text-4xl font-bold tracking-tight sm:text-6xl">
-            {project.title}
-          </h1>
+          {project.logoImage ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={project.logoImage.src}
+              alt={project.logoImage.alt}
+              className="h-14 w-auto object-contain sm:h-20 lg:h-24"
+            />
+          ) : (
+            <h1 className="text-gradient text-4xl font-bold tracking-tight sm:text-6xl">
+              {project.title}
+            </h1>
+          )}
           <p className="mt-4 text-lg text-gray-400">{project.blurb}</p>
 
           {/* Meta + actions */}
@@ -103,8 +114,8 @@ export default async function ProjectPage({
           <ProjectLinks links={project.links} className="mt-7" />
         </div>
 
-        {/* ── Cover image ────────────────────────────────────────── */}
-        {cover && (
+        {/* ── Cover image (standard landscape layout) ────────────── */}
+        {!phoneLayout && cover && (
           <ScrollFade className="mt-12">
             <ProjectImageFrame image={cover} priority />
           </ScrollFade>
@@ -175,8 +186,57 @@ export default async function ProjectPage({
           </div>
         </ScrollFade>
 
-        {/* ── Gallery ────────────────────────────────────────────── */}
-        {gallery.length > 0 && (
+        {/* ── Phone layout: branding strip + screen carousel ─────── */}
+        {phoneLayout && (
+          <>
+            {/* Branding assets — hero 3D + logo + icon, no dark box */}
+            {project.brandImages && project.brandImages.length > 0 && (
+              <ScrollFade className="mt-16">
+                <h2 className="text-gradient mb-8 text-2xl font-bold">Brand identity</h2>
+                <div className="flex flex-col items-center gap-10">
+                  {/* 3D hero — full width, floats freely */}
+                  <img
+                    src={project.brandImages[0].src}
+                    alt={project.brandImages[0].alt}
+                    className="w-full max-w-2xl drop-shadow-[0_40px_80px_rgba(124,92,255,0.5)] select-none"
+                  />
+                  {/* Logo + icon side by side */}
+                  {project.brandImages.length > 1 && (
+                    <div className="flex flex-wrap items-center justify-center gap-10">
+                      {project.brandImages.slice(1).map((img, i) => (
+                        <figure key={i} className="flex flex-col items-center gap-3">
+                          <div className="glass rounded-2xl border border-ink-700 p-5 shadow-[0_8px_32px_-8px_rgba(124,92,255,0.3)]">
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            <img
+                              src={img.src}
+                              alt={img.alt}
+                              className="max-h-20 max-w-[220px] object-contain select-none"
+                            />
+                          </div>
+                          {img.caption && (
+                            <figcaption className="font-mono text-xs text-gray-500">
+                              {img.caption}
+                            </figcaption>
+                          )}
+                        </figure>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </ScrollFade>
+            )}
+
+            {/* Screens carousel */}
+            {project.images && project.images.length > 0 && (
+              <ScrollFade className="mt-16">
+                <PhoneCarousel images={project.images} />
+              </ScrollFade>
+            )}
+          </>
+        )}
+
+        {/* ── Standard gallery (marquee) ──────────────────────────── */}
+        {!phoneLayout && gallery.length > 0 && (
           <ScrollFade className="mt-16">
             <ProjectCarousel images={project.images ?? []} />
           </ScrollFade>

@@ -3,6 +3,7 @@ import {
   BookOpen,
   Clock,
   Download,
+  Figma,
   FlaskConical,
   Github,
   Globe,
@@ -26,6 +27,7 @@ const META: Record<ProjectLink["kind"], { label: string; Icon: typeof Globe }> =
   live: { label: "Live demo", Icon: Globe },
   repo: { label: "Source code", Icon: Github },
   docs: { label: "Documentation", Icon: BookOpen },
+  figma: { label: "View in Figma", Icon: Figma },
 };
 
 export function ProjectLinks({

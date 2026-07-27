@@ -29,7 +29,7 @@ export const profile = {
     "I'm currently open to new opportunities — remote or on-site.",
   ],
   // TODO: your city / country (or "Remote").
-  location: "Spain",
+  location: "Norway",
   // TODO: set to true once you have a CV PDF in /public/cv.pdf
   resumeUrl: "/cv.pdf",
   availableForWork: true,
@@ -92,7 +92,7 @@ export type ProjectImage = {
 /** Where a visitor can try, download or read about the project. */
 export type ProjectLink = {
   /** Picks the icon and the default label. */
-  kind: "appstore" | "playstore" | "testflight" | "live" | "repo" | "docs";
+  kind: "appstore" | "playstore" | "testflight" | "live" | "repo" | "docs" | "figma";
   /** Leave "" while the link doesn't exist yet — pair it with `pending: true`. */
   url: string;
   /** Overrides the default label. */
@@ -133,6 +133,15 @@ export type Project = {
   status?: string;
   /** Keeps the project out of the homepage grid (and the carousel) without deleting it. */
   hidden?: boolean;
+  /**
+   * "phone" → renders screens in a PhoneCarousel (no dark landscape frame).
+   * Omit for the default landscape cover + marquee gallery layout.
+   */
+  imageLayout?: "phone";
+  /** Replaces the plain-text h1 title with this image (e.g. a transparent logo PNG). */
+  logoImage?: ProjectImage;
+  /** Branding assets shown in a dedicated visual section above the screens carousel. */
+  brandImages?: ProjectImage[];
 };
 
 /** Find a project by its slug (used by the detail pages). */
@@ -141,6 +150,86 @@ export function getProject(slug: string): Project | undefined {
 }
 
 export const projects: Project[] = [
+  {
+    slug: "iwalkie",
+    title: "iWalkie",
+    blurb: "UI/UX design concept for a safety-first walkie-talkie app.",
+    description:
+      "A complete design concept — brand identity plus full UX wireframes — for a walkie-talkie iOS app built around real-time group communication and safety. From the PTT home screen to colour-coded emergency alerts, every screen was designed in Figma.",
+    overview: [
+      "iWalkie reimagines the walkie-talkie for smartphones, with a focus on real-time group communication and safety. The core interaction is a large push-to-talk button that live-streams your voice to a group — but the app goes further: incoming audio is transcribed to text in the chat view, so nothing gets lost when you can't listen.",
+      "The safety layer is what makes it distinct. Any member of a group can trigger a location share or an SOS alert, which surfaces in a colour-coded notification centre (blue for location, yellow for alert, red for SOS) and requires an explicit confirmation from recipients — closing the loop so you know the alert was seen.",
+      "The project covers two Figma deliverables: a brand identity (logo, dark colour palette with violet accents, typography and icon set) and a full set of UX wireframes mapping every screen and interaction flow.",
+    ],
+    highlights: [
+      "Designed the complete brand identity: logo, dark colour system with violet accents, typography scale, and iconography.",
+      "Wireframed the full PTT flow — idle home screen, active call with live audio waveform, and speaker identification.",
+      "Designed the chat view with real-time voice-to-text transcription and multi-modal media toolbar.",
+      "Created a group safety alert system: location share, alert, and SOS — each requiring recipient confirmation and surfaced in a colour-coded notification centre.",
+      "Built a reusable Figma component library to keep all screens pixel-consistent.",
+    ],
+    tags: ["Figma", "UI/UX Design", "Branding", "iOS", "Safety"],
+    tools: ["Figma"],
+    imageLayout: "phone",
+    logoImage: {
+      src: "/projects/iwalkie-logo.png",
+      alt: "iWalkie",
+    },
+    brandImages: [
+      {
+        src: "/projects/iwalkie-splash.png",
+        alt: "iWalkie 3D perspective hero — active PTT call in progress",
+        caption: "Brand hero",
+      },
+    ],
+    images: [
+      {
+        src: "/projects/iwalkie-brand-hero.png",
+        alt: "iWalkie splash screen with the logo centred on a dark background",
+        caption: "Splash — the brand in one frame",
+      },
+      {
+        src: "/projects/iwalkie-home.png",
+        alt: "iWalkie home screen with the push-to-talk button and contact sidebar",
+        caption: "Home — push-to-talk, always one tap away",
+      },
+      {
+        src: "/projects/iwalkie-active-call.png",
+        alt: "iWalkie active PTT call with live audio waveform and speaker name",
+        caption: "Active call — live waveform, speaker identified",
+      },
+      {
+        src: "/projects/iwalkie-chat.png",
+        alt: "Chat view showing real-time voice-to-text transcription of a message",
+        caption: "Chat — voice messages transcribed in real time",
+      },
+      {
+        src: "/projects/iwalkie-group-alert.png",
+        alt: "Group channel with a location alert awaiting confirmation from recipients",
+        caption: "Group alert — location shared, waiting for reads",
+      },
+      {
+        src: "/projects/iwalkie-notifications.png",
+        alt: "Notification centre with colour-coded safety alerts: blue location, yellow alert, red SOS",
+        caption: "Notifications — colour-coded by urgency",
+      },
+    ],
+    year: "2025",
+    role: "Designer — branding and UX",
+    links: [
+      {
+        kind: "figma",
+        url: "https://www.figma.com/design/Vrwtz6Z0HxJSGRm3PJm3cr/iWalkie?node-id=203-20676",
+        label: "Branding",
+      },
+      {
+        kind: "figma",
+        url: "https://www.figma.com/design/Vrwtz6Z0HxJSGRm3PJm3cr/iWalkie?node-id=0-1",
+        label: "Wireframe",
+      },
+    ],
+    status: "Completed",
+  },
   {
     slug: "flam-tourist-card",
     title: "FLÅM Tourist Card",
