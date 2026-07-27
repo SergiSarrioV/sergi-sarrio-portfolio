@@ -219,12 +219,12 @@ export const projects: Project[] = [
     links: [
       {
         kind: "figma",
-        url: "https://www.figma.com/design/Vrwtz6Z0HxJSGRm3PJm3cr/iWalkie?node-id=203-20676",
+        url: "https://www.figma.com/proto/Vrwtz6Z0HxJSGRm3PJm3cr/iWalkie?node-id=203-20676&viewport=697%2C1375%2C0.26&t=WoPlkolSKtH5NK0V-1&scaling=min-zoom&content-scaling=fixed&page-id=203%3A20675",
         label: "Branding",
       },
       {
         kind: "figma",
-        url: "https://www.figma.com/design/Vrwtz6Z0HxJSGRm3PJm3cr/iWalkie?node-id=0-1",
+        url: "https://www.figma.com/proto/Vrwtz6Z0HxJSGRm3PJm3cr/iWalkie?node-id=143-15&viewport=845%2C-156%2C0.05&t=hPdjENhXjNUK1LVJ-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=143%3A15&page-id=0%3A1",
         label: "Wireframe",
       },
     ],
