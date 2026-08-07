@@ -21,8 +21,7 @@ const description = profile.tagline;
 export const metadata: Metadata = {
   title,
   description,
-  // TODO: set to your real deployed URL for correct social previews.
-  metadataBase: new URL("https://sergisarrio.vercel.app"),
+  metadataBase: new URL("https://sergi-sarrio-portfolio.vercel.app"),
   openGraph: {
     title,
     description,
