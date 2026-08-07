@@ -11,6 +11,7 @@ import { ProjectLinks } from "@/components/ProjectLinks";
 export function ProjectCard({ project, wide = false }: { project: Project; wide?: boolean }) {
   const featured = project.featured;
   const cover = project.images?.[0];
+  const isPhone = project.imageLayout === "phone";
   const ref = useRef<HTMLElement>(null);
   const [pos, setPos] = useState({ x: 0, y: 0 });
   const [active, setActive] = useState(false);
@@ -24,27 +25,44 @@ export function ProjectCard({ project, wide = false }: { project: Project; wide?
   /* Preview of the project's main screen — a screenshot once there is one,
      the vector mockup until then. */
   const preview = cover && (cover.src || cover.mockup) && (
-    <div className="relative overflow-hidden rounded-xl border border-ink-700 bg-ink-950/60 shadow-[0_24px_70px_-32px_rgba(124,92,255,0.75)]">
-      <div className="aspect-[16/10] w-full">
-        {cover.src ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={cover.src}
-            alt={cover.alt}
-            loading="lazy"
-            className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-[1.04] motion-reduce:transform-none motion-reduce:transition-none"
-          />
-        ) : (
-          <ProjectMockup
-            kind={cover.mockup!}
-            label={cover.alt}
-            className="transition-transform duration-500 group-hover:scale-[1.04] motion-reduce:transform-none motion-reduce:transition-none"
-          />
-        )}
+    isPhone && cover.src ? (
+      /* Phone-layout projects: the cover is a portrait device shot, so float it
+         on a soft violet glow instead of boxing it in a dark frame with black
+         letterbox bars on either side. */
+      <div className="relative flex items-center justify-center px-4 py-2">
+        <div className="pointer-events-none absolute left-1/2 top-1/2 h-56 w-56 -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent-violet/25 blur-3xl" />
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={cover.src}
+          alt={cover.alt}
+          loading="lazy"
+          draggable={false}
+          className="relative max-h-[380px] w-auto select-none drop-shadow-[0_30px_60px_rgba(124,92,255,0.45)] transition-transform duration-500 group-hover:scale-[1.04] motion-reduce:transform-none motion-reduce:transition-none"
+        />
       </div>
-      {/* Keeps the visual anchored to the card instead of floating on its own */}
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-ink-900/70 to-transparent" />
-    </div>
+    ) : (
+      <div className="relative overflow-hidden rounded-xl border border-ink-700 bg-ink-950/60 shadow-[0_24px_70px_-32px_rgba(124,92,255,0.75)]">
+        <div className="aspect-[16/10] w-full">
+          {cover.src ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={cover.src}
+              alt={cover.alt}
+              loading="lazy"
+              className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-[1.04] motion-reduce:transform-none motion-reduce:transition-none"
+            />
+          ) : (
+            <ProjectMockup
+              kind={cover.mockup!}
+              label={cover.alt}
+              className="transition-transform duration-500 group-hover:scale-[1.04] motion-reduce:transform-none motion-reduce:transition-none"
+            />
+          )}
+        </div>
+        {/* Keeps the visual anchored to the card instead of floating on its own */}
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-ink-900/70 to-transparent" />
+      </div>
+    )
   );
 
   return (
