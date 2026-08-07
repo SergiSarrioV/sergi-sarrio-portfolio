@@ -1,12 +1,12 @@
 import { ImageIcon } from "lucide-react";
 import type { ProjectImage } from "@/data/portfolio";
 import { ProjectMockup } from "@/components/ProjectMockup";
+import { Img } from "@/components/Img";
 
 /**
  * Renders a project visual inside a framed figure, preferring a real
  * screenshot and falling back to the project's vector mockup. Both share the
- * frame's 16/10 ratio, so nothing shifts while the page loads. Uses a plain
- * <img> so it works on any host without image-optimization config.
+ * frame's 16/10 ratio, so nothing shifts while the page loads.
  */
 export function ProjectImageFrame({
   image,
@@ -23,11 +23,11 @@ export function ProjectImageFrame({
     <figure className={className}>
       <div className="glass relative aspect-[16/10] w-full overflow-hidden rounded-2xl border border-ink-700 shadow-[0_30px_80px_-40px_rgba(124,92,255,0.6)]">
         {hasSrc ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
+          <Img
             src={image.src}
             alt={image.alt}
-            loading={priority ? "eager" : "lazy"}
+            priority={priority}
+            sizes="(max-width: 768px) 100vw, 800px"
             className="h-full w-full object-contain"
           />
         ) : image.mockup ? (

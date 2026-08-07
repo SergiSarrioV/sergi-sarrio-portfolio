@@ -2,17 +2,13 @@ import type { MockupKind } from "@/components/ProjectMockup";
 
 /* ────────────────────────────────────────────────────────────────────────
  *  PORTFOLIO CONTENT  ·  Edit everything here. No need to touch the components.
- *
- *  👉 Fields marked  // TODO  are placeholders — replace them with your real
- *     info before sharing the URL on your CV.
  * ──────────────────────────────────────────────────────────────────────── */
 
 export const profile = {
   name: "Sergi Sarrió",
-  // TODO: your headline role — e.g. "Full-Stack Engineer", "Product Engineer".
+  // Headline role, shown in the page title and hero.
   role: "Full-Stack Developer",
   // Rotating titles shown with a typewriter effect under your name.
-  // TODO: tweak these to match how you want to present yourself.
   roles: [
     "Full-Stack Developer",
     "React & Next.js Engineer",
@@ -22,24 +18,26 @@ export const profile = {
   // Short punchy tagline shown in the hero.
   tagline: "I build full-stack products end to end — web, mobile, and the systems behind them.",
   // 2–4 sentence bio for the About section.
-  // TODO: make this yours — what you do, how you work, what you're after.
   bio: [
     "I'm a full-stack developer who enjoys turning ideas into shipped products. I work across the whole stack: React & Next.js on the web, React Native on mobile, and Python (FastAPI) services backed by PostgreSQL.",
     "I care about clean architecture, real-world reliability (offline-first, payments, auth), and building things that people actually use. Recently I've been designing and building a multi-app marketplace platform from scratch.",
     "I'm currently open to new opportunities — remote or on-site.",
   ],
-  // TODO: your city / country (or "Remote").
+  // Your city / country (or "Remote").
   location: "Norway",
-  // TODO: set to true once you have a CV PDF in /public/cv.pdf
+  // Path to the CV PDF in /public.
   resumeUrl: "/cv.pdf",
   availableForWork: true,
 };
 
+// Canonical production URL — used for metadata, sitemap, robots and OG tags.
+// Change this to your real custom domain when you have one.
+export const siteUrl = "https://sergi-sarrio-portfolio.vercel.app";
+
 export const social = {
   email: "sarriovsergi@gmail.com",
-  // TODO: replace with your real profile URLs (leave "" to hide the link).
-  github: "https://github.com/", // TODO: e.g. https://github.com/sergisarrio
-  linkedin: "https://linkedin.com/in/", // TODO: e.g. https://linkedin.com/in/sergisarrio
+  github: "https://github.com/SergiSarrioV",
+  linkedin: "https://www.linkedin.com/in/sergisarrioweb/",
   twitter: "", // optional
 };
 
@@ -77,7 +75,7 @@ export const skills: { category: string; items: string[] }[] = [
 
 export type ProjectImage = {
   /**
-   * Path under /public, e.g. "/projects/flam-mobile.png". Leave "" to fall back
+   * Path under /public, e.g. "/projects/flam-mobile.webp". Leave "" to fall back
    * to the vector `mockup` below — a real screenshot always wins when present.
    */
   src: string;
@@ -172,44 +170,44 @@ export const projects: Project[] = [
     tools: ["Figma"],
     imageLayout: "phone",
     logoImage: {
-      src: "/projects/iwalkie-logo.png",
+      src: "/projects/iwalkie-logo.webp",
       alt: "iWalkie",
     },
     brandImages: [
       {
-        src: "/projects/iwalkie-splash.png",
+        src: "/projects/iwalkie-splash.webp",
         alt: "iWalkie 3D perspective hero — active PTT call in progress",
         caption: "Brand hero",
       },
     ],
     images: [
       {
-        src: "/projects/iwalkie-brand-hero.png",
+        src: "/projects/iwalkie-brand-hero.webp",
         alt: "iWalkie splash screen with the logo centred on a dark background",
         caption: "Splash — the brand in one frame",
       },
       {
-        src: "/projects/iwalkie-home.png",
+        src: "/projects/iwalkie-home.webp",
         alt: "iWalkie home screen with the push-to-talk button and contact sidebar",
         caption: "Home — push-to-talk, always one tap away",
       },
       {
-        src: "/projects/iwalkie-active-call.png",
+        src: "/projects/iwalkie-active-call.webp",
         alt: "iWalkie active PTT call with live audio waveform and speaker name",
         caption: "Active call — live waveform, speaker identified",
       },
       {
-        src: "/projects/iwalkie-chat.png",
+        src: "/projects/iwalkie-chat.webp",
         alt: "Chat view showing real-time voice-to-text transcription of a message",
         caption: "Chat — voice messages transcribed in real time",
       },
       {
-        src: "/projects/iwalkie-group-alert.png",
+        src: "/projects/iwalkie-group-alert.webp",
         alt: "Group channel with a location alert awaiting confirmation from recipients",
         caption: "Group alert — location shared, waiting for reads",
       },
       {
-        src: "/projects/iwalkie-notifications.png",
+        src: "/projects/iwalkie-notifications.webp",
         alt: "Notification centre with colour-coded safety alerts: blue location, yellow alert, red SOS",
         caption: "Notifications — colour-coded by urgency",
       },
@@ -273,47 +271,47 @@ export const projects: Project[] = [
         caption: "Home — discover Flåm and plan your dates",
       },
       {
-        src: "/projects/ftc-explore.png",
+        src: "/projects/ftc-explore.webp",
         alt: "Explore screen listing bundled experience packs with filters for hotels, activities and dining",
         caption: "Explore — browse bundled experience packs",
       },
       {
-        src: "/projects/ftc-pack-weekend.png",
+        src: "/projects/ftc-pack-weekend.webp",
         alt: "Weekend Retreat pack detail breaking down each included experience and the total per person",
         caption: "Pack detail — every experience bundled into one price",
       },
       {
-        src: "/projects/ftc-pack-extreme.png",
+        src: "/projects/ftc-pack-extreme.webp",
         alt: "Extreme Adventure pack detail with its own set of activities and pricing",
         caption: "Another pack — Extreme Adventure",
       },
       {
-        src: "/projects/ftc-cart.png",
+        src: "/projects/ftc-cart.webp",
         alt: "Cart screen showing a confirmed, paid order with the total and an invoice download",
         caption: "Checkout — one payment, split across providers behind the scenes",
       },
       {
-        src: "/projects/ftc-pass.png",
+        src: "/projects/ftc-pass.webp",
         alt: "My Pass screen with the active FLÅM Tourist Card, an HMAC-signed QR that works offline, and Add to Apple Wallet",
         caption: "My Pass — the offline-first QR, add it to Apple Wallet",
       },
       {
-        src: "/projects/ftc-my-trip.png",
+        src: "/projects/ftc-my-trip.webp",
         alt: "My Trip itinerary with a per-day timeline of accommodation, transport and activities to schedule",
         caption: "My Trip — a per-day itinerary built from your pack",
       },
       {
-        src: "/projects/ftc-notifications.png",
+        src: "/projects/ftc-notifications.webp",
         alt: "Notifications screen listing trip and booking updates",
         caption: "Notifications — trip and booking updates",
       },
       {
-        src: "/projects/ftc-account.png",
+        src: "/projects/ftc-account.webp",
         alt: "Account screen with profile, language and settings",
         caption: "Account — profile, language and settings",
       },
       {
-        src: "/projects/ftc-register.png",
+        src: "/projects/ftc-register.webp",
         alt: "Create account screen for registering to save a trip and get the pass",
         caption: "Register — save a trip and claim your pass",
       },
@@ -368,22 +366,22 @@ export const projects: Project[] = [
     imageLayout: "phone",
     images: [
       {
-        src: "/projects/cooper-dashboard.png",
+        src: "/projects/cooper-dashboard.webp",
         alt: "COOPER dashboard showing the monthly balance and budget vs. real by category",
         caption: "Dashboard — budget vs. real, by category",
       },
       {
-        src: "/projects/cooper-budgets.png",
+        src: "/projects/cooper-budgets.webp",
         alt: "Automatic budgets screen splitting salary with the 50/30/20 rule",
         caption: "Automatic budgets — 50/30/20, reshaped every month from real spending",
       },
       {
-        src: "/projects/cooper-registro.png",
+        src: "/projects/cooper-registro.webp",
         alt: "Movements ledger listing income and expenses for the month",
         caption: "Registro — logging income and expenses",
       },
       {
-        src: "/projects/cooper-hierarchy.png",
+        src: "/projects/cooper-hierarchy.webp",
         alt: "Savings hierarchy screen with five levels and the current one in progress",
         caption: "Savings hierarchy — what to fund next",
       },

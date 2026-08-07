@@ -11,6 +11,7 @@ import { ProjectImageFrame } from "@/components/ProjectImageFrame";
 import { ProjectCarousel } from "@/components/ProjectCarousel";
 import { PhoneCarousel } from "@/components/PhoneCarousel";
 import { ProjectLinks } from "@/components/ProjectLinks";
+import { Img } from "@/components/Img";
 
 // Only pre-generated slugs are valid; everything else 404s.
 export const dynamicParams = false;
@@ -82,10 +83,11 @@ export default async function ProjectPage({
             </span>
           )}
           {project.logoImage ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
+            <Img
               src={project.logoImage.src}
               alt={project.logoImage.alt}
+              priority
+              sizes="(max-width: 640px) 300px, 480px"
               className="h-14 w-auto object-contain sm:h-20 lg:h-24"
             />
           ) : (
@@ -195,10 +197,11 @@ export default async function ProjectPage({
                 <h2 className="text-gradient mb-8 text-2xl font-bold">Brand identity</h2>
                 <div className="flex flex-col items-center gap-10">
                   {/* 3D hero — full width, floats freely */}
-                  <img
+                  <Img
                     src={project.brandImages[0].src}
                     alt={project.brandImages[0].alt}
-                    className="w-full max-w-2xl drop-shadow-[0_40px_80px_rgba(124,92,255,0.5)] select-none"
+                    sizes="(max-width: 672px) 100vw, 672px"
+                    className="h-auto w-full max-w-2xl drop-shadow-[0_40px_80px_rgba(124,92,255,0.5)] select-none"
                   />
                   {/* Logo + icon side by side */}
                   {project.brandImages.length > 1 && (
@@ -207,10 +210,11 @@ export default async function ProjectPage({
                         <figure key={i} className="flex flex-col items-center gap-3">
                           <div className="glass rounded-2xl border border-ink-700 p-5 shadow-[0_8px_32px_-8px_rgba(124,92,255,0.3)]">
                             {/* eslint-disable-next-line @next/next/no-img-element */}
-                            <img
+                            <Img
                               src={img.src}
                               alt={img.alt}
-                              className="max-h-20 max-w-[220px] object-contain select-none"
+                              sizes="220px"
+                              className="h-auto max-h-20 max-w-[220px] object-contain select-none"
                             />
                           </div>
                           {img.caption && (

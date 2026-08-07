@@ -7,6 +7,7 @@ import { useRef, useState } from "react";
 import type { Project } from "@/data/portfolio";
 import { ProjectMockup } from "@/components/ProjectMockup";
 import { ProjectLinks } from "@/components/ProjectLinks";
+import { Img } from "@/components/Img";
 
 export function ProjectCard({ project, wide = false }: { project: Project; wide?: boolean }) {
   const featured = project.featured;
@@ -31,24 +32,22 @@ export function ProjectCard({ project, wide = false }: { project: Project; wide?
          letterbox bars on either side. */
       <div className="relative flex items-center justify-center px-4 py-2">
         <div className="pointer-events-none absolute left-1/2 top-1/2 h-56 w-56 -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent-violet/25 blur-3xl" />
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <Img
           src={cover.src}
           alt={cover.alt}
-          loading="lazy"
           draggable={false}
-          className="relative max-h-[380px] w-auto select-none drop-shadow-[0_30px_60px_rgba(124,92,255,0.45)] transition-transform duration-500 group-hover:scale-[1.04] motion-reduce:transform-none motion-reduce:transition-none"
+          sizes="(max-width: 640px) 55vw, 240px"
+          className="relative h-auto max-h-[380px] w-auto select-none drop-shadow-[0_30px_60px_rgba(124,92,255,0.45)] transition-transform duration-500 group-hover:scale-[1.04] motion-reduce:transform-none motion-reduce:transition-none"
         />
       </div>
     ) : (
       <div className="relative overflow-hidden rounded-xl border border-ink-700 bg-ink-950/60 shadow-[0_24px_70px_-32px_rgba(124,92,255,0.75)]">
         <div className="aspect-[16/10] w-full">
           {cover.src ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
+            <Img
               src={cover.src}
               alt={cover.alt}
-              loading="lazy"
+              sizes="(max-width: 1024px) 100vw, 500px"
               className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-[1.04] motion-reduce:transform-none motion-reduce:transition-none"
             />
           ) : (

@@ -3,6 +3,7 @@
 import { useState, useCallback } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import type { ProjectImage } from "@/data/portfolio";
+import { Img } from "@/components/Img";
 
 /**
  * Full-width sliding carousel designed for portrait phone mockups.
@@ -39,13 +40,13 @@ export function PhoneCarousel({ images }: { images: ProjectImage[] }) {
                 className="flex-shrink-0 flex justify-center py-8 px-4"
                 style={{ width: "78%" }}
               >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <Img
                   src={img.src}
                   alt={img.alt}
-                  loading={i === 0 ? "eager" : "lazy"}
+                  priority={i === 0}
                   draggable={false}
-                  className="max-w-[220px] sm:max-w-[260px] lg:max-w-[290px] select-none
+                  sizes="(max-width: 640px) 220px, (max-width: 1024px) 260px, 290px"
+                  className="h-auto w-full max-w-[220px] sm:max-w-[260px] lg:max-w-[290px] select-none
                              drop-shadow-[0_40px_64px_rgba(124,92,255,0.45)]
                              transition-transform duration-500"
                   style={{
