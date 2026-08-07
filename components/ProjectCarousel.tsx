@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Pause, Play } from "lucide-react";
 import type { ProjectImage } from "@/data/portfolio";
 import { ProjectMockup } from "@/components/ProjectMockup";
+import { Img } from "@/components/Img";
 
 /**
  * Infinite marquee of project screens. The track holds two identical copies of
@@ -95,11 +96,10 @@ function Slide({
     >
       <div className="glass relative aspect-[16/10] overflow-hidden rounded-2xl border border-ink-700 shadow-[0_30px_80px_-40px_rgba(124,92,255,0.7)]">
         {image.src ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
+          <Img
             src={image.src}
             alt={duplicate ? "" : image.alt}
-            loading="lazy"
+            sizes="(max-width: 640px) 290px, (max-width: 1024px) 440px, 520px"
             className="h-full w-full object-contain"
           />
         ) : image.mockup ? (
