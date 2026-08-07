@@ -264,32 +264,58 @@ export const projects: Project[] = [
       "Turborepo",
       "pnpm",
     ],
-    // Drop real screenshots in /public/projects/ and set `src` (e.g. "/projects/flam-mobile.png")
-    // — the screenshot then replaces the vector `mockup` automatically.
+    // Real mobile screens rendered in the phone carousel (see `imageLayout`).
+    imageLayout: "phone",
     images: [
       {
-        src: "",
-        mockup: "flam-mobile",
-        alt: "Mobile app booking flow with the checkout bundle and payout split",
-        caption: "Mobile app — bundle experiences, then split the payment across providers",
+        src: "/projects/ftc-home.png",
+        alt: "FTC home screen — a Discover Flåm hero over a fjord photo with a plan-your-trip date picker",
+        caption: "Home — discover Flåm and plan your dates",
       },
       {
-        src: "",
-        mockup: "flam-wallet",
-        alt: "Wallet pass showing an HMAC-signed QR code that validates offline",
-        caption: "Offline-first Wallet pass with an HMAC-signed QR",
+        src: "/projects/ftc-explore.png",
+        alt: "Explore screen listing bundled experience packs with filters for hotels, activities and dining",
+        caption: "Explore — browse bundled experience packs",
       },
       {
-        src: "",
-        mockup: "flam-desktop",
-        alt: "Electron desktop dashboard with KPIs, a bookings chart and partner list",
-        caption: "Desktop dashboard — sales, bookings and partner payouts",
+        src: "/projects/ftc-pack-weekend.png",
+        alt: "Weekend Retreat pack detail breaking down each included experience and the total per person",
+        caption: "Pack detail — every experience bundled into one price",
       },
       {
-        src: "",
-        mockup: "flam-web",
-        alt: "Web booking page with the hero and the three card tiers",
-        caption: "Web app — plan a stay from the browser",
+        src: "/projects/ftc-pack-extreme.png",
+        alt: "Extreme Adventure pack detail with its own set of activities and pricing",
+        caption: "Another pack — Extreme Adventure",
+      },
+      {
+        src: "/projects/ftc-cart.png",
+        alt: "Cart screen showing a confirmed, paid order with the total and an invoice download",
+        caption: "Checkout — one payment, split across providers behind the scenes",
+      },
+      {
+        src: "/projects/ftc-pass.png",
+        alt: "My Pass screen with the active FLÅM Tourist Card, an HMAC-signed QR that works offline, and Add to Apple Wallet",
+        caption: "My Pass — the offline-first QR, add it to Apple Wallet",
+      },
+      {
+        src: "/projects/ftc-my-trip.png",
+        alt: "My Trip itinerary with a per-day timeline of accommodation, transport and activities to schedule",
+        caption: "My Trip — a per-day itinerary built from your pack",
+      },
+      {
+        src: "/projects/ftc-notifications.png",
+        alt: "Notifications screen listing trip and booking updates",
+        caption: "Notifications — trip and booking updates",
+      },
+      {
+        src: "/projects/ftc-account.png",
+        alt: "Account screen with profile, language and settings",
+        caption: "Account — profile, language and settings",
+      },
+      {
+        src: "/projects/ftc-register.png",
+        alt: "Create account screen for registering to save a trip and get the pass",
+        caption: "Register — save a trip and claim your pass",
       },
     ],
     year: "2025–2026",
@@ -303,8 +329,6 @@ export const projects: Project[] = [
     ],
     featured: true,
     status: "In development",
-    // Not ready to show yet — kept in the data so it's a one-line change to bring back.
-    hidden: true,
   },
   {
     slug: "cooper",
@@ -341,10 +365,10 @@ export const projects: Project[] = [
       "Jest + RN Testing Library",
       "EAS Build",
     ],
+    imageLayout: "phone",
     images: [
       {
         src: "/projects/cooper-dashboard.png",
-        mockup: "cooper-dashboard",
         alt: "COOPER dashboard showing the monthly balance and budget vs. real by category",
         caption: "Dashboard — budget vs. real, by category",
       },
@@ -355,13 +379,11 @@ export const projects: Project[] = [
       },
       {
         src: "/projects/cooper-registro.png",
-        mockup: "cooper-registro",
         alt: "Movements ledger listing income and expenses for the month",
         caption: "Registro — logging income and expenses",
       },
       {
         src: "/projects/cooper-hierarchy.png",
-        mockup: "cooper-hierarchy",
         alt: "Savings hierarchy screen with five levels and the current one in progress",
         caption: "Savings hierarchy — what to fund next",
       },
