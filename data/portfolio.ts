@@ -268,7 +268,7 @@ export const projects: Project[] = [
     imageLayout: "phone",
     images: [
       {
-        src: "/projects/ftc-home.png",
+        src: "/projects/ftc-home.webp",
         alt: "FTC home screen — a Discover Flåm hero over a fjord photo with a plan-your-trip date picker",
         caption: "Home — discover Flåm and plan your dates",
       },
