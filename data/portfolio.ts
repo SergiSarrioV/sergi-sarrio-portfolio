@@ -1,5 +1,3 @@
-import type { MockupKind } from "@/components/ProjectMockup";
-
 /* ────────────────────────────────────────────────────────────────────────
  *  PORTFOLIO CONTENT  ·  Edit everything here. No need to touch the components.
  * ──────────────────────────────────────────────────────────────────────── */
@@ -15,8 +13,19 @@ export const profile = {
     "Python · FastAPI · Supabase",
     "I ship products end-to-end",
   ],
-  // Short punchy tagline shown in the hero.
+  // Short punchy tagline (SEO description + social card).
   tagline: "I build full-stack products end to end — web, mobile, and the systems behind them.",
+  /**
+   * Hero headline, animated word by word. Wrap the part you want in bold with
+   * **double asterisks**.
+   */
+  headline:
+    "Full-stack developer and designer building **web, mobile and the systems behind them** — end to end.",
+  // Large first line of the About section.
+  aboutLede:
+    "I turn ideas into shipped products — from the Figma file to the database, and everything in between.",
+  // Photo for the About card. Drop a file in /public and set the path; "" shows a placeholder.
+  portrait: "",
   // 2–4 sentence bio for the About section.
   bio: [
     "I'm a full-stack developer who enjoys turning ideas into shipped products. I work across the whole stack: React & Next.js on the web, React Native on mobile, and Python (FastAPI) services backed by PostgreSQL.",
@@ -41,46 +50,196 @@ export const social = {
   twitter: "", // optional
 };
 
-/* Skills grouped by category. Add/remove freely. */
-export const skills: { category: string; items: string[] }[] = [
+/**
+ * Skills grouped by category. `logo` is a file in /public/logos (devicon SVGs);
+ * omit it and the skill renders as a plain text chip.
+ */
+export type Skill = { name: string; logo?: string };
+
+export const skills: { category: string; items: Skill[] }[] = [
   {
     category: "Languages",
-    items: ["TypeScript", "JavaScript", "Python", "SQL"],
+    items: [
+      { name: "TypeScript", logo: "/logos/typescript.svg" },
+      { name: "JavaScript", logo: "/logos/javascript.svg" },
+      { name: "Python", logo: "/logos/python.svg" },
+      { name: "SQL" },
+      { name: "Swift", logo: "/logos/swift.svg" },
+    ],
   },
   {
     category: "Frontend",
-    items: ["React", "Next.js", "React Native (Expo)", "Tailwind CSS", "Zustand", "i18next"],
+    items: [
+      { name: "React", logo: "/logos/react.svg" },
+      { name: "Next.js", logo: "/logos/nextjs.svg" },
+      { name: "Tailwind CSS", logo: "/logos/tailwindcss.svg" },
+      { name: "HTML", logo: "/logos/html5.svg" },
+      { name: "CSS / SCSS", logo: "/logos/css3.svg" },
+    ],
+  },
+  {
+    category: "Mobile",
+    items: [
+      { name: "React Native", logo: "/logos/react.svg" },
+      { name: "Expo", logo: "/logos/expo.svg" },
+      { name: "Ionic", logo: "/logos/ionic.svg" },
+      { name: "SQLite", logo: "/logos/sqlite.svg" },
+      { name: "StoreKit · Apple Wallet" },
+    ],
   },
   {
     category: "Backend",
-    items: ["FastAPI", "Node.js", "REST APIs", "SQLAlchemy (async)", "Stripe Connect"],
+    items: [
+      { name: "FastAPI", logo: "/logos/fastapi.svg" },
+      { name: "Node.js", logo: "/logos/nodejs.svg" },
+      { name: "Express", logo: "/logos/express.svg" },
+      { name: "Socket.IO", logo: "/logos/socketio.svg" },
+      { name: "RabbitMQ", logo: "/logos/rabbitmq.svg" },
+      { name: "Stripe Connect" },
+    ],
   },
   {
     category: "Data & Infra",
     items: [
-      "PostgreSQL",
-      "Supabase",
-      "Supabase Realtime",
-      "SQLite (on-device)",
-      "Auth / JWT",
-      "Vercel",
-      "Railway",
+      { name: "PostgreSQL", logo: "/logos/postgresql.svg" },
+      { name: "Supabase", logo: "/logos/supabase.svg" },
+      { name: "MongoDB", logo: "/logos/mongodb.svg" },
+      { name: "Vercel", logo: "/logos/vercel.svg" },
+      { name: "Electron", logo: "/logos/electron.svg" },
+    ],
+  },
+  {
+    category: "Design",
+    items: [
+      { name: "Figma", logo: "/logos/figma.svg" },
+      { name: "Illustrator", logo: "/logos/illustrator.svg" },
+      { name: "Photoshop", logo: "/logos/photoshop.svg" },
     ],
   },
   {
     category: "Tooling",
-    items: ["pnpm", "Turborepo (monorepo)", "Git", "Electron", "EAS Build", "CI/CD", "Vitest"],
+    items: [
+      { name: "Git", logo: "/logos/git.svg" },
+      { name: "pnpm", logo: "/logos/pnpm.svg" },
+      { name: "Turborepo" },
+      { name: "Vitest", logo: "/logos/vitest.svg" },
+      { name: "Selenium", logo: "/logos/selenium.svg" },
+      { name: "Claude Code" },
+    ],
   },
+];
+
+/* Work experience, newest first. Highlights support **bold**.
+ * TODO: `place` for AYESA / NTT DATA / IXIA REGAL is a guess — not on the CV. */
+export type Job = {
+  slug: string;
+  company: string;
+  role: string;
+  period: string;
+  /** Short year shown in the sticky index. */
+  year: string;
+  place: string;
+  lede: string;
+  highlights: string[];
+  stack: string[];
+};
+
+export const experience: Job[] = [
+  {
+    slug: "flamsbana",
+    company: "Flåmsbana",
+    role: "Tourist Guide",
+    period: "May 2025 – present",
+    year: "2025",
+    place: "Flåm, Norway · summer season",
+    lede: "Welcoming passengers aboard one of the world's most famous train rides.",
+    highlights: [
+      "Assisting and guiding passengers boarding the **Flåmsbana** train in a high-volume tourism environment.",
+      "Creating a friendly experience for guests from **diverse cultural backgrounds**.",
+      "Organising and coordinating groups to keep boarding and tours flowing smoothly.",
+    ],
+    stack: ["Communication", "Customer service", "Team collaboration"],
+  },
+  {
+    slug: "ayesa",
+    company: "AYESA",
+    role: "UX/UI Designer",
+    period: "Feb – Nov 2024",
+    year: "2024",
+    place: "Spain",
+    lede: "Designed the full UX of a school management app, mobile and web.",
+    highlights: [
+      "Designed the **complete UX** for a school management app (mobile + web) in Figma.",
+      "Built a **reusable component library** in Figma for hand-off to front-end developers.",
+      "Presented interactive prototypes and design rationale **directly to clients**.",
+    ],
+    stack: ["Figma", "UX Design", "Wireframing", "Prototyping", "Component library"],
+  },
+  {
+    slug: "ntt-data",
+    company: "NTT DATA",
+    role: "Software Developer",
+    period: "Dec 2020 – Dec 2023",
+    year: "2020–23",
+    place: "Spain",
+    lede: "Three years building automation and apps for large insurance clients.",
+    highlights: [
+      "Automated Mapfre's manual workflows with Node-RED and Selenium, **saving 1,000+ hours**.",
+      "Extracted data from frame-nested pages and loaded it via **bulk SQL inserts**.",
+      "Built the **Santa Lucía insurance app**: Ionic, MongoDB, third-party API integration and JWT auth.",
+      "Developed a React.js website tracking application.",
+    ],
+    stack: ["Node-RED", "Selenium", "React Native", "Ionic", "Node.js", "MongoDB", "SQL"],
+  },
+  {
+    slug: "ixia-regal",
+    company: "IXIA REGAL",
+    role: "Graphic Designer",
+    period: "Sep 2018 – Sep 2019",
+    year: "2018",
+    place: "Alcoy, Spain",
+    lede: "Where the design side started: marketing visuals and landing pages.",
+    highlights: [
+      "Designed product images, marketing visuals and **landing pages** for social media campaigns.",
+      "Edited and retouched photos for e-commerce and promotional use.",
+      "Built and updated static **HTML/CSS** content for the company website.",
+    ],
+    stack: ["Photoshop", "Illustrator", "HTML", "CSS", "Marketing"],
+  },
+];
+
+/* Education and spoken languages — shown in the "rest of it" cards. */
+export const education: { title: string; detail: string; period: string }[] = [
+  {
+    title: "Multiplatform App Development (CFGS DAM)",
+    detail: "IES Mare Nostrum",
+    period: "2023 – 2026",
+  },
+  {
+    title: "Graphic Design and Marketing",
+    detail: "EASDA — School of Arts and Design",
+    period: "2015 – 2018",
+  },
+  {
+    title: "Advertising Photography and Videography",
+    detail: "Veles e Vents",
+    period: "2012 – 2014",
+  },
+];
+
+// TODO: levels are a guess (the CV only lists the languages) — adjust.
+export const languages: { name: string; level: string }[] = [
+  { name: "Spanish", level: "Native" },
+  { name: "Catalan", level: "Native" },
+  { name: "English", level: "Professional" },
+  { name: "Norwegian", level: "Learning" },
 ];
 
 export type ProjectImage = {
   /**
-   * Path under /public, e.g. "/projects/flam-mobile.webp". Leave "" to fall back
-   * to the vector `mockup` below — a real screenshot always wins when present.
+   * Path under /public, e.g. "/projects/flam-mobile.webp".
    */
   src: string;
-  /** Vector recreation of the screen, drawn by components/ProjectMockup.tsx. */
-  mockup?: MockupKind;
   /** Describes the image (alt text, also used as the SVG's accessible name). */
   alt: string;
   /** Optional caption shown under the image. */
@@ -131,10 +290,7 @@ export type Project = {
   status?: string;
   /** Keeps the project out of the homepage grid (and the carousel) without deleting it. */
   hidden?: boolean;
-  /**
-   * "phone" → renders screens in a PhoneCarousel (no dark landscape frame).
-   * Omit for the default landscape cover + marquee gallery layout.
-   */
+  /** Screens are portrait phone screenshots (the only layout currently rendered). */
   imageLayout?: "phone";
   /** Replaces the plain-text h1 title with this image (e.g. a transparent logo PNG). */
   logoImage?: ProjectImage;
