@@ -1,27 +1,27 @@
-import { Navbar } from "@/components/Navbar";
-import { Hero } from "@/components/Hero";
-import { About } from "@/components/About";
-import { Skills } from "@/components/Skills";
-import { Projects } from "@/components/Projects";
-import { Contact } from "@/components/Contact";
-import { Footer } from "@/components/Footer";
-import { AnimatedBackground } from "@/components/AnimatedBackground";
-import { ScrollProgress } from "@/components/ScrollProgress";
+import { SiteShell } from "@/components/site/SiteShell";
+import { Bar } from "@/components/site/Bar";
+import { Hero } from "@/components/site/Hero";
+import { About } from "@/components/site/About";
+import { Skills } from "@/components/site/Skills";
+import { Experience } from "@/components/site/Experience";
+import { Work } from "@/components/site/Work";
+import { Creds } from "@/components/site/Creds";
+import { Closer, Foot } from "@/components/site/Closer";
 
 export default function Home() {
   return (
-    <div className="relative min-h-screen overflow-x-hidden">
-      <AnimatedBackground />
-      <ScrollProgress />
-      <Navbar />
-      <main className="relative z-10">
+    <SiteShell>
+      <Bar />
+      <main>
         <Hero />
         <About />
         <Skills />
-        <Projects />
-        <Contact />
+        <Experience />
+        <Work />
+        <Creds />
+        <Closer />
       </main>
-      <Footer />
-    </div>
+      <Foot />
+    </SiteShell>
   );
 }
