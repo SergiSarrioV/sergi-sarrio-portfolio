@@ -1,4 +1,4 @@
-import { profile, projects, experience } from "@/data/portfolio";
+import { profile, projects } from "@/data/portfolio";
 
 /** Splits "plain **bold part** plain" into words, keeping the bold flag. */
 function words(text: string) {
@@ -22,8 +22,7 @@ function Word({ w }: { w: string }) {
 export function Hero() {
   const [first, ...rest] = profile.name.split(" ");
   const shipped = projects.filter((p) => !p.hidden).length;
-  const firstYear = Math.min(...experience.map((j) => parseInt(j.year)));
-  const years = new Date().getFullYear() - firstYear;
+  const years = profile.yearsInTech;
 
   return (
     <section className="hero" data-hero>
@@ -81,7 +80,7 @@ export function Hero() {
             <b data-count={years} data-suffix="+">
               {years}+
             </b>
-            <span>Years building</span>
+            <span>Years in tech</span>
           </li>
           <li>
             <b data-count={shipped}>{shipped}</b>

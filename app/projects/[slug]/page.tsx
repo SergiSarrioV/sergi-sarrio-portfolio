@@ -74,12 +74,41 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
             />
           </h1>
         ) : (
-          <h1 className="reveal">{project.title}</h1>
+          <h1 className={project.titleMark ? "reveal doc__title--mark" : "reveal"}>
+            {project.titleMark && (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={project.titleMark.src}
+                alt=""
+                aria-hidden="true"
+                width={project.titleMark.width}
+                height={project.titleMark.height}
+                className="doc__mark"
+              />
+            )}
+            {project.title}
+          </h1>
         )}
         <p className="doc__tag reveal">{project.blurb}</p>
         <p className="doc__lede reveal">{project.description}</p>
 
-        {project.images && project.images.length > 0 && (
+        {project.video ? (
+          <section className="doc__section reveal" aria-label="Presentation">
+            <h2 className="doc__label">Presentation</h2>
+            <video
+              className="doc__video"
+              src={project.video.src}
+              poster={project.video.poster}
+              title={project.video.title}
+              muted
+              loop
+              autoPlay
+              playsInline
+              disablePictureInPicture
+              preload="metadata"
+            />
+          </section>
+        ) : project.images && project.images.length > 0 && (
           <section className="doc__section reveal" aria-label="Screens">
             <h2 className="doc__label">Screens</h2>
             <Shots images={project.images} />
@@ -136,6 +165,16 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                 <div>
                   <dt>Status</dt>
                   <dd>{project.status}</dd>
+                </div>
+              )}
+              {project.company && (
+                <div>
+                  <dt>Company</dt>
+                  <dd>
+                    <a href={project.company.url} target="_blank" rel="noopener noreferrer">
+                      Org.nr. {project.company.orgNumber} <span aria-hidden="true">↗</span>
+                    </a>
+                  </dd>
                 </div>
               )}
             </dl>
