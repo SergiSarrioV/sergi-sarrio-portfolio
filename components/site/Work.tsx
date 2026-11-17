@@ -22,16 +22,29 @@ export function Work() {
             return (
               <article key={p.slug} className="case reveal">
                 <Link className="case__shot" href={href} tabIndex={-1} aria-hidden="true">
-                  <div className="case__phones">
-                    {shots.map((im) => (
-                      <Img
-                        key={im.src}
-                        src={im.src}
-                        alt=""
-                        sizes="(max-width: 860px) 30vw, 200px"
-                      />
-                    ))}
-                  </div>
+                  {p.video ? (
+                    <video
+                      className="case__video"
+                      src={p.video.src}
+                      poster={p.video.poster}
+                      muted
+                      loop
+                      autoPlay
+                      playsInline
+                      preload="metadata"
+                    />
+                  ) : (
+                    <div className="case__phones">
+                      {shots.map((im) => (
+                        <Img
+                          key={im.src}
+                          src={im.src}
+                          alt=""
+                          sizes="(max-width: 860px) 30vw, 200px"
+                        />
+                      ))}
+                    </div>
+                  )}
                 </Link>
                 <div className="case__body">
                   <p className="case__no">

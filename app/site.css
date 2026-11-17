@@ -1062,6 +1062,16 @@ html.lenis body {
 .site .case__shot:hover .case__phones img:nth-child(3) {
   transform: translateX(6px) rotate(2deg);
 }
+.site .case__shot:has(.case__video) {
+  padding: 0;
+}
+.site .case__video {
+  pointer-events: none;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
 .site .case__no {
   letter-spacing: 0.1em;
   color: var(--ink-subtle);
@@ -1486,6 +1496,17 @@ html.lenis body {
 }
 
 /* Screens track (phone screenshots) */
+.site .doc__video {
+  aspect-ratio: 16/9;
+  border: var(--bw) solid var(--ink);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-hard-lg);
+  background: var(--canvas-base);
+  width: 100%;
+  display: block;
+  /* Pure loop: no click-to-pause, no right-click "Save video". */
+  pointer-events: none;
+}
 .site .shots__track {
   scroll-snap-type: x mandatory;
   scrollbar-width: none;
@@ -1668,4 +1689,16 @@ html.lenis body {
   .site [data-flash] {
     animation: none;
   }
+}
+
+/* Isologo before a project's text title (detail page). */
+.site .doc__title--mark {
+  align-items: center;
+  gap: 0.35em;
+  display: flex;
+}
+.site .doc__mark {
+  flex: none;
+  width: auto;
+  height: 0.8em;
 }

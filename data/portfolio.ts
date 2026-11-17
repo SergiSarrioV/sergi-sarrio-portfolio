@@ -25,7 +25,7 @@ export const profile = {
   aboutLede:
     "I turn ideas into shipped products — from the Figma file to the database, and everything in between.",
   // Photo for the About card. Drop a file in /public and set the path; "" shows a placeholder.
-  portrait: "",
+  portrait: "/portrait.webp",
   // 2–4 sentence bio for the About section.
   bio: [
     "I'm a full-stack developer who enjoys turning ideas into shipped products. I work across the whole stack: React & Next.js on the web, React Native on mobile, and Python (FastAPI) services backed by PostgreSQL.",
@@ -37,6 +37,12 @@ export const profile = {
   // Path to the CV PDF in /public.
   resumeUrl: "/cv.pdf",
   availableForWork: true,
+  /**
+   * Hero stat "Years in tech". Set by hand, not computed from dates: it only counts
+   * paid tech roles — IXIA REGAL 12 mo + NTT DATA 36 mo + AYESA 10 mo = 58 mo ≈ 4.8 years.
+   * (Flåmsbana and the gaps between roles are not tech experience.)
+   */
+  yearsInTech: 4,
 };
 
 // Canonical production URL — used for metadata, sitemap, robots and OG tags.
@@ -51,7 +57,7 @@ export const social = {
 };
 
 /**
- * Skills grouped by category. `logo` is a file in /public/logos (devicon SVGs);
+ * Skills grouped by category. Only what's backed by the IT CV or real work. `logo` is a file in /public/logos (devicon SVGs);
  * omit it and the skill renders as a plain text chip.
  */
 export type Skill = { name: string; logo?: string };
@@ -60,10 +66,10 @@ export const skills: { category: string; items: Skill[] }[] = [
   {
     category: "Languages",
     items: [
-      { name: "TypeScript", logo: "/logos/typescript.svg" },
+      { name: "Java", logo: "/logos/java.svg" },
       { name: "JavaScript", logo: "/logos/javascript.svg" },
       { name: "Python", logo: "/logos/python.svg" },
-      { name: "SQL" },
+      { name: "SQL", logo: "/logos/sql.svg" },
       { name: "Swift", logo: "/logos/swift.svg" },
     ],
   },
@@ -83,29 +89,24 @@ export const skills: { category: string; items: Skill[] }[] = [
       { name: "React Native", logo: "/logos/react.svg" },
       { name: "Expo", logo: "/logos/expo.svg" },
       { name: "Ionic", logo: "/logos/ionic.svg" },
-      { name: "SQLite", logo: "/logos/sqlite.svg" },
-      { name: "StoreKit · Apple Wallet" },
+      { name: "StoreKit · Apple Wallet", logo: "/logos/apple.svg" },
     ],
   },
   {
     category: "Backend",
     items: [
-      { name: "FastAPI", logo: "/logos/fastapi.svg" },
       { name: "Node.js", logo: "/logos/nodejs.svg" },
       { name: "Express", logo: "/logos/express.svg" },
       { name: "Socket.IO", logo: "/logos/socketio.svg" },
       { name: "RabbitMQ", logo: "/logos/rabbitmq.svg" },
-      { name: "Stripe Connect" },
     ],
   },
   {
     category: "Data & Infra",
     items: [
-      { name: "PostgreSQL", logo: "/logos/postgresql.svg" },
       { name: "Supabase", logo: "/logos/supabase.svg" },
       { name: "MongoDB", logo: "/logos/mongodb.svg" },
-      { name: "Vercel", logo: "/logos/vercel.svg" },
-      { name: "Electron", logo: "/logos/electron.svg" },
+      { name: "Firebase", logo: "/logos/firebase.svg" },
     ],
   },
   {
@@ -120,11 +121,14 @@ export const skills: { category: string; items: Skill[] }[] = [
     category: "Tooling",
     items: [
       { name: "Git", logo: "/logos/git.svg" },
-      { name: "pnpm", logo: "/logos/pnpm.svg" },
-      { name: "Turborepo" },
-      { name: "Vitest", logo: "/logos/vitest.svg" },
       { name: "Selenium", logo: "/logos/selenium.svg" },
-      { name: "Claude Code" },
+      { name: "Node-RED", logo: "/logos/nodered.svg" },
+      { name: "n8n", logo: "/logos/n8n.svg" },
+      { name: "VS Code", logo: "/logos/vscode.svg" },
+      { name: "Excel (CSV, XLSX)", logo: "/logos/spreadsheet.svg" },
+      { name: "Claude Code", logo: "/logos/claudecode.svg" },
+      { name: "Cursor", logo: "/logos/cursor.svg" },
+      { name: "Codex", logo: "/logos/codex.svg" },
     ],
   },
 ];
@@ -149,16 +153,17 @@ export const experience: Job[] = [
     slug: "flamsbana",
     company: "Flåmsbana",
     role: "Tourist Guide",
-    period: "May 2025 – present",
-    year: "2025",
-    place: "Flåm, Norway · summer season",
+    period: "May 2025 – Oct 2026",
+    year: "2025–26",
+    place: "Flåm, Norway · summer seasons",
     lede: "Welcoming passengers aboard one of the world's most famous train rides.",
     highlights: [
-      "Assisting and guiding passengers boarding the **Flåmsbana** train in a high-volume tourism environment.",
-      "Creating a friendly experience for guests from **diverse cultural backgrounds**.",
-      "Organising and coordinating groups to keep boarding and tours flowing smoothly.",
+      "Welcoming and assisting passengers boarding the famous **Flåmsbana** train during the summer season.",
+      "Creating a comfortable and friendly environment for guests from **diverse cultural backgrounds**.",
+      "Organising and coordinating groups to ensure smooth boarding and tour flow.",
+      "Developing strong communication skills and customer service expertise in a **high-volume tourism environment**.",
     ],
-    stack: ["Communication", "Customer service", "Team collaboration"],
+    stack: ["Welcoming guests", "Guiding passengers", "Passenger assistance", "Communication skills", "Team collaboration", "Friendly environment"],
   },
   {
     slug: "ayesa",
@@ -173,7 +178,7 @@ export const experience: Job[] = [
       "Built a **reusable component library** in Figma for hand-off to front-end developers.",
       "Presented interactive prototypes and design rationale **directly to clients**.",
     ],
-    stack: ["Figma", "UX Design", "Wireframing", "Prototyping", "Component library"],
+    stack: ["Figma", "UX Design", "Mobile", "Wireframing", "Component library", "Prototyping"],
   },
   {
     slug: "ntt-data",
@@ -185,11 +190,11 @@ export const experience: Job[] = [
     lede: "Three years building automation and apps for large insurance clients.",
     highlights: [
       "Automated Mapfre's manual workflows with Node-RED and Selenium, **saving 1,000+ hours**.",
-      "Extracted data from frame-nested pages and loaded it via **bulk SQL inserts**.",
+      "Extracted data from frame-nested pages and loaded it via **bulk SQL inserts** into databases.",
       "Built the **Santa Lucía insurance app**: Ionic, MongoDB, third-party API integration and JWT auth.",
       "Developed a React.js website tracking application.",
     ],
-    stack: ["Node-RED", "Selenium", "React Native", "Ionic", "Node.js", "MongoDB", "SQL"],
+    stack: ["Node-RED", "React Native", "Node.js", "JavaScript", "Ionic", "Selenium", "MongoDB", "SQL"],
   },
   {
     slug: "ixia-regal",
@@ -202,9 +207,11 @@ export const experience: Job[] = [
     highlights: [
       "Designed product images, marketing visuals and **landing pages** for social media campaigns.",
       "Edited and retouched photos for e-commerce and promotional use.",
-      "Built and updated static **HTML/CSS** content for the company website.",
+      "Created static web content and occasionally updated **HTML/CSS** for company web pages.",
+      "Collaborated with the marketing team to ensure design consistency and brand alignment.",
+      "Gained foundational experience in digital design while studying at the School of Arts of Alcoy.",
     ],
-    stack: ["Photoshop", "Illustrator", "HTML", "CSS", "Marketing"],
+    stack: ["Photoshop", "Illustrator", "HTML", "CSS", "Marketing", "Social media"],
   },
 ];
 
@@ -294,8 +301,17 @@ export type Project = {
   imageLayout?: "phone";
   /** Replaces the plain-text h1 title with this image (e.g. a transparent logo PNG). */
   logoImage?: ProjectImage;
+  /** Small mark (isologo) shown before the text title on the detail page. Decorative. */
+  titleMark?: { src: string; width: number; height: number };
   /** Branding assets shown in a dedicated visual section above the screens carousel. */
   brandImages?: ProjectImage[];
+  /**
+   * Presentation video (mp4 under /public). When set it replaces the screens:
+   * it loops muted, without controls, on the homepage card and the detail page.
+   */
+  video?: { src: string; poster: string; title: string };
+  /** Registered company behind the project — shown on the detail page with a registry link. */
+  company?: { orgNumber: string; url: string };
 };
 
 /** Find a project by its slug (used by the detail pages). */
@@ -399,7 +415,7 @@ export const projects: Project[] = [
       "Designed the whole architecture: pnpm + Turborepo monorepo with 4 apps (mobile, web, desktop dashboard, partner app) sharing packages.",
       "Built a FastAPI + PostgreSQL (Supabase) backend with async SQLAlchemy and Supabase Realtime for live availability.",
       "Implemented Stripe Connect marketplace payments (separate charges & transfers) to split a single purchase across multiple providers plus platform margin.",
-      "Shipped offline-first Apple/Google Wallet passes (.pkpass) with HMAC-signed QR codes that validate without a connection.",
+      "Shipped offline-first Apple Wallet passes (.pkpass) with HMAC-signed QR codes that validate without a connection.",
       "Multi-language from day one (Norwegian, English, Spanish, German) via i18next.",
     ],
     tags: ["Next.js", "React Native", "FastAPI", "PostgreSQL", "Stripe Connect", "Electron"],
@@ -418,69 +434,25 @@ export const projects: Project[] = [
       "Turborepo",
       "pnpm",
     ],
-    // Real mobile screens rendered in the phone carousel (see `imageLayout`).
-    imageLayout: "phone",
-    images: [
-      {
-        src: "/projects/ftc-home.webp",
-        alt: "FTC home screen — a Discover Flåm hero over a fjord photo with a plan-your-trip date picker",
-        caption: "Home — discover Flåm and plan your dates",
-      },
-      {
-        src: "/projects/ftc-explore.webp",
-        alt: "Explore screen listing bundled experience packs with filters for hotels, activities and dining",
-        caption: "Explore — browse bundled experience packs",
-      },
-      {
-        src: "/projects/ftc-pack-weekend.webp",
-        alt: "Weekend Retreat pack detail breaking down each included experience and the total per person",
-        caption: "Pack detail — every experience bundled into one price",
-      },
-      {
-        src: "/projects/ftc-pack-extreme.webp",
-        alt: "Extreme Adventure pack detail with its own set of activities and pricing",
-        caption: "Another pack — Extreme Adventure",
-      },
-      {
-        src: "/projects/ftc-cart.webp",
-        alt: "Cart screen showing a confirmed, paid order with the total and an invoice download",
-        caption: "Checkout — one payment, split across providers behind the scenes",
-      },
-      {
-        src: "/projects/ftc-pass.webp",
-        alt: "My Pass screen with the active FLÅM Tourist Card, an HMAC-signed QR that works offline, and Add to Apple Wallet",
-        caption: "My Pass — the offline-first QR, add it to Apple Wallet",
-      },
-      {
-        src: "/projects/ftc-my-trip.webp",
-        alt: "My Trip itinerary with a per-day timeline of accommodation, transport and activities to schedule",
-        caption: "My Trip — a per-day itinerary built from your pack",
-      },
-      {
-        src: "/projects/ftc-notifications.webp",
-        alt: "Notifications screen listing trip and booking updates",
-        caption: "Notifications — trip and booking updates",
-      },
-      {
-        src: "/projects/ftc-account.webp",
-        alt: "Account screen with profile, language and settings",
-        caption: "Account — profile, language and settings",
-      },
-      {
-        src: "/projects/ftc-register.webp",
-        alt: "Create account screen for registering to save a trip and get the pass",
-        caption: "Register — save a trip and claim your pass",
-      },
-    ],
+    // No screenshots on purpose (avoids copies of the UI) — the presentation video instead.
+    video: {
+      src: "/projects/ftc-presentation.mp4",
+      poster: "/projects/ftc-presentation-poster.webp",
+      title: "FLÅM Tourist Card — app presentation",
+    },
     year: "2025–2026",
     role: "Solo full-stack developer",
-    // TODO: paste the real URLs here and drop `pending` — the chip becomes a
-    // working button. Delete any line you don't plan to ship.
+    // TODO: paste the store URLs and drop `pending` — the chip becomes a working button.
     links: [
-      { kind: "live", url: "", label: "Try the web app", pending: true },
+      { kind: "live", url: "https://flamtouristcard.no", label: "flamtouristcard.no" },
       { kind: "appstore", url: "", pending: true },
       { kind: "playstore", url: "", pending: true },
     ],
+    titleMark: { src: "/projects/ftc-isologo.png", width: 259, height: 400 },
+    company: {
+      orgNumber: "938 298 394",
+      url: "https://virksomhet.brreg.no/nb/oppslag/enheter/938298394",
+    },
     featured: true,
     status: "In development",
   },
@@ -489,9 +461,9 @@ export const projects: Project[] = [
     title: "COOPER",
     blurb: "An offline-first personal finance app for iOS.",
     description:
-      "A paid iOS app that turns the classic budget spreadsheet into something you actually keep using: log income and expenses, compare them against a monthly budget, and follow a savings hierarchy that tells you where the next euro should go. No accounts, no backend — every number lives on the device.",
+      "A freemium iOS app that turns the classic budget spreadsheet into something you actually keep using: log income and expenses, compare them against a monthly budget, and follow a savings hierarchy that tells you where the next euro should go. No accounts, no backend — every number lives on the device.",
     overview: [
-      "COOPER is a one-time-purchase personal finance app for iOS, built with Expo SDK 57 and expo-router. It grew out of a spreadsheet workflow: a movements ledger, a monthly budget per category, and a dashboard that compares planned vs. real — plus a savings-hierarchy methodology that guides the user to their next financial step (emergency fund, debts, goals, investing).",
+      "COOPER is a freemium personal finance app for iOS — free to use, with Pro unlocked by a one-time StoreKit purchase instead of a subscription — built with Expo SDK 57 and expo-router. It grew out of a spreadsheet workflow: a movements ledger, a monthly budget per category, and a dashboard that compares planned vs. real — plus a savings-hierarchy methodology that guides the user to their next financial step (emergency fund, debts, goals, investing).",
       "The design constraint I set was no backend. All data is stored on-device in SQLite behind a repository layer, which keeps the app fully usable offline and sidesteps holding anyone's financial data on a server. Backups are export/import files the user owns.",
       "Architecturally it's a strict layered app with import rules that only flow downward: thin routes → feature slices → shared design system → persistence → a pure-TypeScript domain core. That core (finance engine, savings hierarchy, FX, debts, goals) has no React or Expo imports at all, so the money logic is unit-tested with Vitest in plain Node — fast, and independent of the UI.",
     ],
@@ -500,7 +472,7 @@ export const projects: Project[] = [
       "Offline-first persistence: on-device SQLite behind a repository layer, with backup export/import and no backend or user accounts at all.",
       "All money handled as integer cents end to end, formatted to currency only at the UI edge — no float arithmetic anywhere.",
       "Built a native iOS home-screen widget in Swift (WidgetKit) via Apple targets, sharing state with the React Native app.",
-      "Shipped the paid-app plumbing: one-time purchase paywall with expo-iap and an entitlement store, biometric lock, and local notifications for month-close reminders.",
+      "Shipped the freemium plumbing: a one-time Pro purchase via StoreKit (expo-iap) with an entitlement store, Face ID lock, and local notifications for month-close reminders.",
       "Localised into 6 languages (ES, EN, DE, IT, NO, PT) with enforced key parity, plus full light/dark theming from design tokens.",
       "Wrote a scaffolding generator and a QA gate (typecheck + lint + Vitest + component tests) so new features start compliant with the architecture.",
     ],
@@ -514,6 +486,7 @@ export const projects: Project[] = [
       "Reanimated",
       "i18next",
       "expo-iap",
+      "StoreKit",
       "Swift / WidgetKit",
       "Vitest",
       "Jest + RN Testing Library",
@@ -545,10 +518,9 @@ export const projects: Project[] = [
     year: "2026",
     role: "Solo developer — product, architecture and design",
     links: [
-      { kind: "live", url: "https://d0dba889.cooper-78o.pages.dev/", label: "Landing page" },
-      { kind: "appstore", url: "", pending: true },
-      { kind: "testflight", url: "", pending: true },
+      { kind: "appstore", url: "https://apps.apple.com/app/id6794945091" },
+      { kind: "live", url: "https://cooper-app.com/", label: "cooper-app.com" },
     ],
-    status: "Completed",
+    status: "Live on the App Store",
   },
 ];

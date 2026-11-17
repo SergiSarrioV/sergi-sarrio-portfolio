@@ -212,25 +212,35 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
         }
 
         if (has("[data-skills] .s-tool")) {
-          gsap.from("[data-skills] .s-tool", {
-            y: 12,
-            autoAlpha: 0,
-            duration: 0.45,
-            ease: "power3.out",
-            stagger: 0.025,
-            scrollTrigger: { trigger: "[data-skills]", start: "top 70%", once: true },
-          });
+          // fromTo (not from): with from(), a re-run of this effect (React strict mode / HMR)
+          // reads the half-applied y:12 as the end value and the chips stay offset.
+          // clearProps hands transform back to the CSS hover lift when done.
+          gsap.fromTo(
+            "[data-skills] .s-tool",
+            { y: 12, opacity: 0 }, // opacity, not autoAlpha: keeps chips in the accessibility tree
+            {
+              y: 0,
+              opacity: 1,
+              duration: 0.45,
+              ease: "power3.out",
+              stagger: 0.025,
+              clearProps: "transform,opacity",
+              scrollTrigger: { trigger: "[data-skills]", start: "top 70%", once: true },
+            },
+          );
         }
 
         if (has(".reveal")) {
-          gsap.set(".reveal", { y: 28, autoAlpha: 0 });
+          // opacity (not autoAlpha/visibility) so unrevealed content stays readable by
+          // screen readers, crawlers and "find in page".
+          gsap.set(".reveal", { y: 28, opacity: 0 });
           ScrollTrigger.batch(".reveal", {
             start: "top 88%",
             once: true,
             onEnter: (batch) =>
               gsap.to(batch, {
                 y: 0,
-                autoAlpha: 1,
+                opacity: 1,
                 duration: 0.7,
                 ease: "power3.out",
                 stagger: 0.09,
